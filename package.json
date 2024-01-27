@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/saurabh-pandey2730/blog-webApp#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "mongoose": "^8.1.1",
