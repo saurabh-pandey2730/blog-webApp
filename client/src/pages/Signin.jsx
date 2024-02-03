@@ -2,11 +2,14 @@ import React from 'react'
 import { Button, Label, TextInput ,Alert , Spinner} from 'flowbite-react';
 import { Link , useNavigate } from 'react-router-dom';
 import { useState} from 'react'
-
+ import { useDispatch,useSelector } from 'react-redux';
+ import { signInStart, signInSuccess,signInFailure } from '../redux/user/userSlice';
 function Signin() {
   const [formData , setFormData]= useState({})
-  const [errorMessage , setErrorMessage]= useState(null)
-  const [loading , setLoading]= useState(false)
+  // const [errorMessage , setErrorMessage]= useState(null)
+  // const [loading , setLoading]= useState(false)
+  const {loading, error:errorMessage}=useSelector((state)=>state.user)
+  const dispatch = useDispatch()
 const navigate = useNavigate()
 const handlechange=(e)=>{
   setFormData({...formData,[e.target.id]: e.target.value.trim() })
@@ -14,11 +17,11 @@ const handlechange=(e)=>{
 const  handleSubmit= async(e) =>{
   e.preventDefault()
   if ( !formData.email || !formData.password) {
-    return setErrorMessage('Please fill out all fields.');
+    return dispatch(signInFailure('Please fill out all fields.'));
     }
    try {
-     setLoading(true)
-     setErrorMessage(null)
+
+    dispatch(signInStart())
        const res= await fetch('/api/auth/signin',{
          method :'POST',
          headers:{'Content-Type':'application/json'},
@@ -26,15 +29,16 @@ const  handleSubmit= async(e) =>{
      })
       const data = await res.json();
     if (data.success === false) {
-      return setErrorMessage(data.message);
+      return dispatch(signInFailure(data.message));
     }
-    setLoading(false);
+  
     if(res.ok) {
+      dispatch(signInSuccess(data))
       navigate('/');
     }
   } catch (error) {
-    setErrorMessage(error.message);
-    setLoading(false)
+ 
+    dispatch(signInFailure(error.message))
     }
 
 }
@@ -59,7 +63,7 @@ const  handleSubmit= async(e) =>{
 
       <div className='flex-1'>
         <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-         
+
           <div>
             <Label value='Your email' />
             <TextInput type='text' placeholder='name@company.com' id='email' onChange={handlechange} />
