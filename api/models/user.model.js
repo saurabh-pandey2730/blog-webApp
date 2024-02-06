@@ -16,6 +16,12 @@ const userSchema = new mongoose.Schema({
         required: true,
     
     },
+    
+        profilePicture:{
+            type: String,
+             default :"https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg",
+        }
+    
 },
 {
     timestamps:true
