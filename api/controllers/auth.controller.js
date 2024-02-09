@@ -45,8 +45,8 @@ try{
       if (!validUser) {
          return next(errorHandler(404,"Invalid Email or Password"))
       }
-      const  isValidPassord=bcryptjs.compareSync(password,validUser.password)
-      if(!isValidPassord){
+      const  isValidPassword=bcryptjs.compareSync(password,validUser.password)
+      if(!isValidPassword){
           return next(errorHandler(400,'Invalid  Password'))
       }
       const token=jwt.sign({id:validUser._id}, process.env.JWT_SECRET)
