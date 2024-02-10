@@ -35,7 +35,7 @@ export const updateUser =async(req,res,next)=>{
       );
     
     }
-   
+}
     try {
         const updatedUser = await User.findByIdAndUpdate(
           req.params.userId,
@@ -51,11 +51,10 @@ export const updateUser =async(req,res,next)=>{
         );
         const { password, ...rest } = updatedUser._doc;
         res.status(200).json(rest);
-        console.log("true")
+        
       } catch (error) {
-        console.log(" is error")
+        
         next(error);
       }
 }
-console.log('req is',req.body)
-}
+
