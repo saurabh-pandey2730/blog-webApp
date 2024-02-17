@@ -26,10 +26,10 @@ export const create = async (req, res, next) => {
   }
 };
 
-export const getposts = async(res,res,next)=>{
+export const getposts = async(req,res,next)=>{
 
   try {
-    const startIndex = parseInt(req.query.startIndex) ||0;
+    const startIndex = parseInt(req.query.startIndex) || 0;
     const limit =parseInt(req.query.limit) || 9
     const sortDireaction = req.query.order === 'asc' ? 1:-1
      const posts = await Post.find({
@@ -44,7 +44,7 @@ export const getposts = async(res,res,next)=>{
       ],
     }),
      })
-     .sort({updatedAt:sortDireaction})
+     .sort({updatedAt : sortDireaction})
      .skip(startIndex)
      .limit(limit)
      const totalPosts= await Post.countDocuments()
