@@ -105,7 +105,7 @@ export default function Search() {
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
         <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
           <div className='flex   items-center gap-2'>
-            <label className='whitespace-nowrap font-semibold'>
+            <label className='whitespace-nowrap font-semibold dark:text-white'>
               Search Term:
             </label>
             <TextInput
@@ -117,14 +117,14 @@ export default function Search() {
             />
           </div>
           <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Sort:</label>
+            <label className='font-semibold dark:text-white'>Sort:</label>
             <Select onChange={handleChange} value={sidebarData.sort} id='sort'>
               <option value='desc'>Latest</option>
               <option value='asc'>Oldest</option>
             </Select>
           </div>
           <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Category:</label>
+            <label className='font-semibold dark:text-white'>Category:</label>
             <Select
               onChange={handleChange}
               value={sidebarData.category}
@@ -142,7 +142,7 @@ export default function Search() {
         </form>
       </div>
       <div className='w-full'>
-        <h1 className='text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5 '>
+        <h1 className='text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5 dark:text-white '>
           Posts results:
         </h1>
         <div className='p-7 flex flex-wrap gap-4'>
